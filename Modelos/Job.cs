@@ -20,13 +20,6 @@ namespace WinformsConexionBD
 
         public Job() { }
 
-        public Job(string title, decimal? minSalary, decimal? maxSalary)
-        {
-            JobTitle = title;
-            JobMinSalary = minSalary;
-            JobMaxSalary = maxSalary;
-        }
-
         public Job(int id, string title, decimal? minSalary, decimal? maxSalary)
         {
             JobId = id;

@@ -89,6 +89,7 @@ namespace WinformsConexionBD
         {
             try
             {
+                //Uso de PARAMETER para evitar SQL injections
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@name";
                 param.Value = txtJobTitle.Text;
@@ -134,6 +135,7 @@ namespace WinformsConexionBD
             }
         }
 
+        //Creamos la lista extrayendo los datos de la BD
         private List<Job> SelectJobs()
         {
             List<Job> jobs = new List<Job>();

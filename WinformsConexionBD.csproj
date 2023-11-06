@@ -52,7 +52,6 @@
     <Compile Include="Forms\Interface.Designer.cs">
       <DependentUpon>Interface.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modelos\Gestor.cs" />
     <Compile Include="Modelos\Job.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
