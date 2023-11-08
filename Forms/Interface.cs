@@ -15,6 +15,7 @@ namespace WinformsConexionBD
     public partial class Interface : Form
     {
         JobDAL jobDAL = new JobDAL();
+        EmployeeDAL employeeDAL = new EmployeeDAL();
 
         public Interface()
         {
@@ -25,6 +26,7 @@ namespace WinformsConexionBD
         {
             if (cmbSeleccion.SelectedIndex == 0)
             {
+                MostrarListaEmps();
                 labListJobs.Text = "Lista de empleados";
                 lstCosas.Visible = true;
                 labListJobs.Visible = true;
@@ -71,6 +73,14 @@ namespace WinformsConexionBD
 
             foreach (Job job in jobDAL.SelectJobs())
                 lstCosas.Items.Add(job);
+        }
+
+        private void MostrarListaEmps()
+        {
+            lstCosas.Items.Clear();
+
+            foreach (Employee emp in employeeDAL.SelectEmps())
+                lstCosas.Items.Add(emp);
         }
     }
 }

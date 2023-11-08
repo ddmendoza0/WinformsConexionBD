@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace WinformsConexionBD
 
         }
 
-        public Employee(int id, string fName, string lName, string email, string phone, DateTime hireDate, int idJob, decimal salary, int? idManager, int idDepartment)
+        public Employee(int id, string fName, string lName, string email, string phone, DateTime hireDate, int idJob, decimal salary, int? idManager, int? idDepartment)
         {
             IdEmp = id;
             FirstNameEmp = fName; 
@@ -50,8 +51,9 @@ namespace WinformsConexionBD
 
         public override string ToString()
         {
-            return base.ToString();
+            return $"{IdEmp}. " +
+                $"{FirstNameEmp} " +
+                $"{LastNameEmp} ";
         }
-
     }
 }

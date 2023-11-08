@@ -45,6 +45,8 @@ namespace WinformsConexionBD
         {
             try
             {
+                connection.AbrirConexion();
+
                 //Uso de PARAMETER para evitar SQL injections
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@name";
@@ -70,6 +72,7 @@ namespace WinformsConexionBD
             {
                 MessageBox.Show(ex.ToString());
             }
+            connection.CerrarConexion();
         }
 
         private static object DBNullToNull(object val)
@@ -79,6 +82,7 @@ namespace WinformsConexionBD
             else
                 return val;
         }
+
         public static object NullToDBNull(object val)
         {
             if (val == null)
@@ -86,6 +90,5 @@ namespace WinformsConexionBD
             else
                 return val;
         }
-
     }
 }
