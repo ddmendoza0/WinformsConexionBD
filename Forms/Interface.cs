@@ -14,51 +14,11 @@ namespace WinformsConexionBD
 {
     public partial class Interface : Form
     {
-        ConexionBD connect = new ConexionBD();
         JobDAL jobDAL = new JobDAL();
 
         public Interface()
         {
             InitializeComponent();
-        }
-
-        //Boton para abrir y cerrar la conexion a la BD
-        private void butOpen_Click(object sender, EventArgs e)
-        {
-            connect.AbrirConexion();
-
-            //Actualizamos interfaz
-            labConexion.Text = "Conexión: ON";
-            butClose.Visible = true;
-            labSelec.Visible = true;
-            cmbSeleccion.Visible = true;
-            butOpen.Visible = false;
-            labCabecera.Text = "Pulsar para cerrar la conexion";
-        }
-
-        //Boton para cerrar la conexion a la BD
-        private void butClose_Click(object sender, EventArgs e)
-        {
-            connect.CerrarConexion();
-
-            //Actualizamos interfaz
-            labConexion.Text = "Conexión: OFF";
-            butOpen.Visible = true;
-            labSelec.Visible = false;
-            cmbSeleccion.Visible = false;
-            butClose.Visible = false;
-            labCabecera.Text = "Pulsar para abrir la conexion";
-        }
-        
-        private void cmbSeleccion_VisibleChanged(object sender, EventArgs e)
-        {
-            if (cmbSeleccion.Visible == false)
-            {
-                grbJobInsert.Visible = false;
-                lstCosas.Visible = false;
-                labListJobs.Visible = false;
-                grbParametros.Visible = false;
-            }
         }
 
         private void Seleccion_ValueChng(object sender, EventArgs e)

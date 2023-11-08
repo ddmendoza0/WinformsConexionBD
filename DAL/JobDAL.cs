@@ -15,12 +15,13 @@ namespace WinformsConexionBD
         //Creamos la lista extrayendo los datos de la BD
         public List<Job> SelectJobs()
         {
+            connection.AbrirConexion();
+
             List<Job> jobs = new List<Job>();
 
             string query = "SELECT * FROM jobs";
             SqlCommand command = new SqlCommand(query, connection.Connection);
 
-            connection.AbrirConexion();
             SqlDataReader records = command.ExecuteReader();
 
             while (records.Read())
@@ -34,6 +35,7 @@ namespace WinformsConexionBD
 
                 jobs.Add(job);
             }
+            connection.CerrarConexion();
 
             return jobs;
         }
