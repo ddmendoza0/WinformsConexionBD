@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\ConexionBD.cs" />
     <Compile Include="Modelos\Employee.cs" />
     <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="Forms\Interface.cs">

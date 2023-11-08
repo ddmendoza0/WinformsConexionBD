@@ -14,11 +14,8 @@ namespace WinformsConexionBD
 {
     public partial class Interface : Form
     {
-        //Datos para la conexion
-        static string CONNECTION_STRING = @"Data source = 79.143.90.12,54321;
-                            Initial Catalog = MendozaDavidEmploye; Persist Security Info = true;
-                            User Id = sa; Password = 123456789";
-        private SqlConnection connection;
+        ConexionBD connect = new ConexionBD();
+        JobDAL jobDAL = new JobDAL();
 
         public Interface()
         {
@@ -28,44 +25,29 @@ namespace WinformsConexionBD
         //Boton para abrir y cerrar la conexion a la BD
         private void butOpen_Click(object sender, EventArgs e)
         {
-            try
-            {
-                connection = new SqlConnection(CONNECTION_STRING);
-                connection.Open();
+            connect.AbrirConexion();
 
-                //Actualizamos interfaz
-                labConexion.Text = "Conexión: ON";
-                butClose.Visible = true;
-                labSelec.Visible = true;
-                cmbSeleccion.Visible = true;
-                butOpen.Visible = false;
-                labCabecera.Text = "Pulsar para cerrar la conexion";
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            //Actualizamos interfaz
+            labConexion.Text = "Conexión: ON";
+            butClose.Visible = true;
+            labSelec.Visible = true;
+            cmbSeleccion.Visible = true;
+            butOpen.Visible = false;
+            labCabecera.Text = "Pulsar para cerrar la conexion";
         }
 
         //Boton para cerrar la conexion a la BD
         private void butClose_Click(object sender, EventArgs e)
         {
-            try
-            {
-                connection.Close();
+            connect.CerrarConexion();
 
-                //Actualizamos interfaz
-                labConexion.Text = "Conexión: OFF";
-                butOpen.Visible = true;
-                labSelec.Visible = false;
-                cmbSeleccion.Visible = false;
-                butClose.Visible = false;
-                labCabecera.Text = "Pulsar para abrir la conexion";
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            //Actualizamos interfaz
+            labConexion.Text = "Conexión: OFF";
+            butOpen.Visible = true;
+            labSelec.Visible = false;
+            cmbSeleccion.Visible = false;
+            butClose.Visible = false;
+            labCabecera.Text = "Pulsar para abrir la conexion";
         }
         
         private void cmbSeleccion_VisibleChanged(object sender, EventArgs e)
@@ -112,7 +94,7 @@ namespace WinformsConexionBD
         {
             //Comprobamos que la información es correcta
             if (decimal.TryParse(txtMaxSalary.Text, out decimal maxSalary) && decimal.TryParse(txtMinSalary.Text, out decimal minSalary) && txtJobTitle.Text != "")
-                InsertJob(maxSalary,minSalary); //Esta funcion inserta el JOB a la base de datos
+                jobDAL.InsertJob(txtJobTitle.Text ,maxSalary,minSalary); //Esta funcion inserta el JOB a la base de datos
             else
                 MessageBox.Show("Valores introducidos no validos");
             
@@ -122,70 +104,13 @@ namespace WinformsConexionBD
             txtMinSalary.Text = null;
         }
 
-        //Funcion para INSERT en BD
-        private void InsertJob(decimal maxSalary, decimal minSalary)
-        {
-            try
-            {
-                //Uso de PARAMETER para evitar SQL injections
-                SqlParameter param = new SqlParameter();
-                param.ParameterName = "@name";
-                param.Value = txtJobTitle.Text;
-
-                string query = $"INSERT INTO jobs (job_title,min_salary,max_salary) " +
-                                $"VALUES (@name,{maxSalary},{minSalary});" +
-                                $"SELECT SCOPE_IDENTITY();";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.Add(param);
-                object id = command.ExecuteScalar();
-
-                //command.ExecuteNonQuery(); cuando no nos hace falta recuperar valores
-                //command.ExecuteScalar(); cuando recuperas 1 valor
-                //command.ExecuteReader(); cuando recuperas varios valores
-
-                Job newJob = new Job(int.Parse(id.ToString()), txtJobTitle.Text, maxSalary, minSalary);
-
-                MessageBox.Show("Job creado exitosamente");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
         //Muestra la lista de jobs
         private void MostrarListaJobs()
         {
             lstCosas.Items.Clear();
 
-            foreach (Job job in SelectJobs())
+            foreach (Job job in jobDAL.SelectJobs())
                 lstCosas.Items.Add(job);
-        }
-
-        //Creamos la lista extrayendo los datos de la BD
-        private List<Job> SelectJobs()
-        {
-            List<Job> jobs = new List<Job>();
-
-            string query = "SELECT * FROM jobs";
-            SqlCommand command = new SqlCommand(query, connection);
-
-            SqlDataReader records = command.ExecuteReader();
-
-            while (records.Read())
-            {
-                int jobId = (int)records["job_id"];
-                string jobName = (string)records["job_title"];
-                decimal? minSalary = (decimal)records["min_salary"];
-                decimal? maxSalary = (decimal)records["max_salary"];
-
-                Job job = new Job(jobId, jobName, minSalary, maxSalary);
-
-                jobs.Add(job);
-            }
-
-            return jobs;
         }
     }
 }

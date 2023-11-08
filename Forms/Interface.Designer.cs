@@ -44,10 +44,13 @@
             this.cmbSeleccion = new System.Windows.Forms.ComboBox();
             this.labListJobs = new System.Windows.Forms.Label();
             this.grbParametros = new System.Windows.Forms.GroupBox();
-            this.chkLastName = new System.Windows.Forms.CheckBox();
-            this.chkCity = new System.Windows.Forms.CheckBox();
-            this.chkName = new System.Windows.Forms.CheckBox();
             this.labSelec = new System.Windows.Forms.Label();
+            this.labNombre = new System.Windows.Forms.Label();
+            this.labCiudad = new System.Windows.Forms.Label();
+            this.labApellido = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.cmbCiudad = new System.Windows.Forms.ComboBox();
             this.grbJobInsert.SuspendLayout();
             this.grbParametros.SuspendLayout();
             this.SuspendLayout();
@@ -209,46 +212,19 @@
             // 
             // grbParametros
             // 
-            this.grbParametros.Controls.Add(this.chkLastName);
-            this.grbParametros.Controls.Add(this.chkCity);
-            this.grbParametros.Controls.Add(this.chkName);
-            this.grbParametros.Location = new System.Drawing.Point(481, 191);
+            this.grbParametros.Controls.Add(this.cmbCiudad);
+            this.grbParametros.Controls.Add(this.txtApellido);
+            this.grbParametros.Controls.Add(this.txtNombre);
+            this.grbParametros.Controls.Add(this.labApellido);
+            this.grbParametros.Controls.Add(this.labCiudad);
+            this.grbParametros.Controls.Add(this.labNombre);
+            this.grbParametros.Location = new System.Drawing.Point(481, 137);
             this.grbParametros.Name = "grbParametros";
-            this.grbParametros.Size = new System.Drawing.Size(271, 119);
+            this.grbParametros.Size = new System.Drawing.Size(271, 175);
             this.grbParametros.TabIndex = 15;
             this.grbParametros.TabStop = false;
             this.grbParametros.Text = "Parametros";
             this.grbParametros.Visible = false;
-            // 
-            // chkLastName
-            // 
-            this.chkLastName.AutoSize = true;
-            this.chkLastName.Location = new System.Drawing.Point(6, 48);
-            this.chkLastName.Name = "chkLastName";
-            this.chkLastName.Size = new System.Drawing.Size(91, 20);
-            this.chkLastName.TabIndex = 2;
-            this.chkLastName.Text = "Last name";
-            this.chkLastName.UseVisualStyleBackColor = true;
-            // 
-            // chkCity
-            // 
-            this.chkCity.AutoSize = true;
-            this.chkCity.Location = new System.Drawing.Point(6, 74);
-            this.chkCity.Name = "chkCity";
-            this.chkCity.Size = new System.Drawing.Size(51, 20);
-            this.chkCity.TabIndex = 1;
-            this.chkCity.Text = "City";
-            this.chkCity.UseVisualStyleBackColor = true;
-            // 
-            // chkName
-            // 
-            this.chkName.AutoSize = true;
-            this.chkName.Location = new System.Drawing.Point(7, 22);
-            this.chkName.Name = "chkName";
-            this.chkName.Size = new System.Drawing.Size(66, 20);
-            this.chkName.TabIndex = 0;
-            this.chkName.Text = "Name";
-            this.chkName.UseVisualStyleBackColor = true;
             // 
             // labSelec
             // 
@@ -259,6 +235,55 @@
             this.labSelec.TabIndex = 16;
             this.labSelec.Text = "Opciones";
             this.labSelec.Visible = false;
+            // 
+            // labNombre
+            // 
+            this.labNombre.AutoSize = true;
+            this.labNombre.Location = new System.Drawing.Point(7, 22);
+            this.labNombre.Name = "labNombre";
+            this.labNombre.Size = new System.Drawing.Size(56, 16);
+            this.labNombre.TabIndex = 0;
+            this.labNombre.Text = "Nombre";
+            // 
+            // labCiudad
+            // 
+            this.labCiudad.AutoSize = true;
+            this.labCiudad.Location = new System.Drawing.Point(6, 116);
+            this.labCiudad.Name = "labCiudad";
+            this.labCiudad.Size = new System.Drawing.Size(50, 16);
+            this.labCiudad.TabIndex = 1;
+            this.labCiudad.Text = "Ciudad";
+            // 
+            // labApellido
+            // 
+            this.labApellido.AutoSize = true;
+            this.labApellido.Location = new System.Drawing.Point(6, 65);
+            this.labApellido.Name = "labApellido";
+            this.labApellido.Size = new System.Drawing.Size(57, 16);
+            this.labApellido.TabIndex = 2;
+            this.labApellido.Text = "Apellido";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(10, 40);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(255, 22);
+            this.txtNombre.TabIndex = 3;
+            // 
+            // txtApellido
+            // 
+            this.txtApellido.Location = new System.Drawing.Point(9, 84);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(255, 22);
+            this.txtApellido.TabIndex = 4;
+            // 
+            // cmbCiudad
+            // 
+            this.cmbCiudad.FormattingEnabled = true;
+            this.cmbCiudad.Location = new System.Drawing.Point(10, 136);
+            this.cmbCiudad.Name = "cmbCiudad";
+            this.cmbCiudad.Size = new System.Drawing.Size(254, 24);
+            this.cmbCiudad.TabIndex = 5;
             // 
             // Interface
             // 
@@ -306,10 +331,13 @@
         private System.Windows.Forms.ComboBox cmbSeleccion;
         private System.Windows.Forms.Label labListJobs;
         private System.Windows.Forms.GroupBox grbParametros;
-        private System.Windows.Forms.CheckBox chkLastName;
-        private System.Windows.Forms.CheckBox chkCity;
-        private System.Windows.Forms.CheckBox chkName;
         private System.Windows.Forms.Label labSelec;
+        private System.Windows.Forms.Label labApellido;
+        private System.Windows.Forms.Label labCiudad;
+        private System.Windows.Forms.Label labNombre;
+        private System.Windows.Forms.ComboBox cmbCiudad;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtNombre;
     }
 }
 
