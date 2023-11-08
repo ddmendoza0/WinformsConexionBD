@@ -40,9 +40,16 @@
             this.txtMinSalary = new System.Windows.Forms.TextBox();
             this.txtMaxSalary = new System.Windows.Forms.TextBox();
             this.grbJobInsert = new System.Windows.Forms.GroupBox();
-            this.lstJobs = new System.Windows.Forms.ListBox();
+            this.lstCosas = new System.Windows.Forms.ListBox();
+            this.cmbSeleccion = new System.Windows.Forms.ComboBox();
             this.labListJobs = new System.Windows.Forms.Label();
+            this.grbParametros = new System.Windows.Forms.GroupBox();
+            this.chkLastName = new System.Windows.Forms.CheckBox();
+            this.chkCity = new System.Windows.Forms.CheckBox();
+            this.chkName = new System.Windows.Forms.CheckBox();
+            this.labSelec = new System.Windows.Forms.Label();
             this.grbJobInsert.SuspendLayout();
+            this.grbParametros.SuspendLayout();
             this.SuspendLayout();
             // 
             // butOpen
@@ -50,13 +57,13 @@
             this.butOpen.BackColor = System.Drawing.Color.Lime;
             this.butOpen.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butOpen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.butOpen.Location = new System.Drawing.Point(31, 43);
+            this.butOpen.Location = new System.Drawing.Point(31, 45);
             this.butOpen.Name = "butOpen";
             this.butOpen.Size = new System.Drawing.Size(350, 200);
             this.butOpen.TabIndex = 0;
             this.butOpen.Text = "OPEN";
             this.butOpen.UseVisualStyleBackColor = false;
-            this.butOpen.Click += new System.EventHandler(this.butRedBig_Click);
+            this.butOpen.Click += new System.EventHandler(this.butOpen_Click);
             // 
             // labConexion
             // 
@@ -72,14 +79,14 @@
             this.butClose.BackColor = System.Drawing.Color.Crimson;
             this.butClose.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butClose.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.butClose.Location = new System.Drawing.Point(31, 43);
+            this.butClose.Location = new System.Drawing.Point(31, 45);
             this.butClose.Name = "butClose";
             this.butClose.Size = new System.Drawing.Size(350, 200);
             this.butClose.TabIndex = 2;
             this.butClose.Text = "CLOSE";
             this.butClose.UseVisualStyleBackColor = false;
             this.butClose.Visible = false;
-            this.butClose.Click += new System.EventHandler(this.button1_Click);
+            this.butClose.Click += new System.EventHandler(this.butClose_Click);
             // 
             // labCabecera
             // 
@@ -159,31 +166,99 @@
             this.grbJobInsert.Controls.Add(this.txtJobTitle);
             this.grbJobInsert.Controls.Add(this.labMaxSalary);
             this.grbJobInsert.Controls.Add(this.labMinSalary);
-            this.grbJobInsert.Location = new System.Drawing.Point(479, 43);
+            this.grbJobInsert.Location = new System.Drawing.Point(836, 45);
             this.grbJobInsert.Name = "grbJobInsert";
             this.grbJobInsert.Size = new System.Drawing.Size(271, 267);
             this.grbJobInsert.TabIndex = 11;
             this.grbJobInsert.TabStop = false;
-            this.grbJobInsert.Text = "Inserting jobs BD";
             this.grbJobInsert.Visible = false;
             // 
-            // lstJobs
+            // lstCosas
             // 
-            this.lstJobs.FormattingEnabled = true;
-            this.lstJobs.ItemHeight = 16;
-            this.lstJobs.Location = new System.Drawing.Point(836, 66);
-            this.lstJobs.Name = "lstJobs";
-            this.lstJobs.Size = new System.Drawing.Size(311, 244);
-            this.lstJobs.TabIndex = 12;
+            this.lstCosas.FormattingEnabled = true;
+            this.lstCosas.ItemHeight = 16;
+            this.lstCosas.Location = new System.Drawing.Point(836, 66);
+            this.lstCosas.Name = "lstCosas";
+            this.lstCosas.Size = new System.Drawing.Size(311, 244);
+            this.lstCosas.TabIndex = 12;
+            this.lstCosas.Visible = false;
+            // 
+            // cmbSeleccion
+            // 
+            this.cmbSeleccion.FormattingEnabled = true;
+            this.cmbSeleccion.Items.AddRange(new object[] {
+            "Filtrar lista de empleados",
+            "Ver lista de jobs",
+            "Insertar un nuevo job"});
+            this.cmbSeleccion.Location = new System.Drawing.Point(481, 75);
+            this.cmbSeleccion.Name = "cmbSeleccion";
+            this.cmbSeleccion.Size = new System.Drawing.Size(271, 24);
+            this.cmbSeleccion.TabIndex = 14;
+            this.cmbSeleccion.Visible = false;
+            this.cmbSeleccion.SelectedValueChanged += new System.EventHandler(this.Seleccion_ValueChng);
+            this.cmbSeleccion.VisibleChanged += new System.EventHandler(this.cmbSeleccion_VisibleChanged);
             // 
             // labListJobs
             // 
             this.labListJobs.AutoSize = true;
             this.labListJobs.Location = new System.Drawing.Point(836, 41);
             this.labListJobs.Name = "labListJobs";
-            this.labListJobs.Size = new System.Drawing.Size(83, 16);
+            this.labListJobs.Size = new System.Drawing.Size(0, 16);
             this.labListJobs.TabIndex = 13;
-            this.labListJobs.Text = "Lista de jobs";
+            this.labListJobs.Visible = false;
+            // 
+            // grbParametros
+            // 
+            this.grbParametros.Controls.Add(this.chkLastName);
+            this.grbParametros.Controls.Add(this.chkCity);
+            this.grbParametros.Controls.Add(this.chkName);
+            this.grbParametros.Location = new System.Drawing.Point(481, 191);
+            this.grbParametros.Name = "grbParametros";
+            this.grbParametros.Size = new System.Drawing.Size(271, 119);
+            this.grbParametros.TabIndex = 15;
+            this.grbParametros.TabStop = false;
+            this.grbParametros.Text = "Parametros";
+            this.grbParametros.Visible = false;
+            // 
+            // chkLastName
+            // 
+            this.chkLastName.AutoSize = true;
+            this.chkLastName.Location = new System.Drawing.Point(6, 48);
+            this.chkLastName.Name = "chkLastName";
+            this.chkLastName.Size = new System.Drawing.Size(91, 20);
+            this.chkLastName.TabIndex = 2;
+            this.chkLastName.Text = "Last name";
+            this.chkLastName.UseVisualStyleBackColor = true;
+            // 
+            // chkCity
+            // 
+            this.chkCity.AutoSize = true;
+            this.chkCity.Location = new System.Drawing.Point(6, 74);
+            this.chkCity.Name = "chkCity";
+            this.chkCity.Size = new System.Drawing.Size(51, 20);
+            this.chkCity.TabIndex = 1;
+            this.chkCity.Text = "City";
+            this.chkCity.UseVisualStyleBackColor = true;
+            // 
+            // chkName
+            // 
+            this.chkName.AutoSize = true;
+            this.chkName.Location = new System.Drawing.Point(7, 22);
+            this.chkName.Name = "chkName";
+            this.chkName.Size = new System.Drawing.Size(66, 20);
+            this.chkName.TabIndex = 0;
+            this.chkName.Text = "Name";
+            this.chkName.UseVisualStyleBackColor = true;
+            // 
+            // labSelec
+            // 
+            this.labSelec.AutoSize = true;
+            this.labSelec.Location = new System.Drawing.Point(481, 53);
+            this.labSelec.Name = "labSelec";
+            this.labSelec.Size = new System.Drawing.Size(65, 16);
+            this.labSelec.TabIndex = 16;
+            this.labSelec.Text = "Opciones";
+            this.labSelec.Visible = false;
             // 
             // Interface
             // 
@@ -191,8 +266,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1182, 375);
+            this.Controls.Add(this.labSelec);
+            this.Controls.Add(this.grbParametros);
+            this.Controls.Add(this.cmbSeleccion);
             this.Controls.Add(this.labListJobs);
-            this.Controls.Add(this.lstJobs);
+            this.Controls.Add(this.lstCosas);
             this.Controls.Add(this.grbJobInsert);
             this.Controls.Add(this.labCabecera);
             this.Controls.Add(this.butClose);
@@ -203,6 +281,8 @@
             this.Text = "Dumb nonsense";
             this.grbJobInsert.ResumeLayout(false);
             this.grbJobInsert.PerformLayout();
+            this.grbParametros.ResumeLayout(false);
+            this.grbParametros.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,8 +302,14 @@
         private System.Windows.Forms.TextBox txtMinSalary;
         private System.Windows.Forms.TextBox txtMaxSalary;
         private System.Windows.Forms.GroupBox grbJobInsert;
-        private System.Windows.Forms.ListBox lstJobs;
+        private System.Windows.Forms.ListBox lstCosas;
+        private System.Windows.Forms.ComboBox cmbSeleccion;
         private System.Windows.Forms.Label labListJobs;
+        private System.Windows.Forms.GroupBox grbParametros;
+        private System.Windows.Forms.CheckBox chkLastName;
+        private System.Windows.Forms.CheckBox chkCity;
+        private System.Windows.Forms.CheckBox chkName;
+        private System.Windows.Forms.Label labSelec;
     }
 }
 

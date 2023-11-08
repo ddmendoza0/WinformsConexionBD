@@ -23,22 +23,22 @@ namespace WinformsConexionBD
         public Interface()
         {
             InitializeComponent();
-            MostrarLista();
         }
 
         //Boton para abrir y cerrar la conexion a la BD
-        private void butRedBig_Click(object sender, EventArgs e)
+        private void butOpen_Click(object sender, EventArgs e)
         {
             try
             {
                 connection = new SqlConnection(CONNECTION_STRING);
                 connection.Open();
-                
+
                 //Actualizamos interfaz
                 //Obtenemos visibilidad del INSERT JOB
                 labConexion.Text = "Conexión: ON";
                 butClose.Visible = true;
-                grbJobInsert.Visible = true;
+                labSelec.Visible = true;
+                cmbSeleccion.Visible = true;
                 butOpen.Visible = false;
                 labCabecera.Text = "Pulsar para cerrar la conexion";
             }
@@ -49,7 +49,7 @@ namespace WinformsConexionBD
         }
 
         //Boton para cerrar la conexion a la BD
-        private void button1_Click(object sender, EventArgs e)
+        private void butClose_Click(object sender, EventArgs e)
         {
             try
             {
@@ -58,13 +58,53 @@ namespace WinformsConexionBD
                 //Actualizamos interfaz
                 labConexion.Text = "Conexión: OFF";
                 butOpen.Visible = true;
+                labSelec.Visible = false;
+                cmbSeleccion.Visible = false;
                 butClose.Visible = false;
-                grbJobInsert.Visible = false;
                 labCabecera.Text = "Pulsar para abrir la conexion";
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+        
+        private void cmbSeleccion_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cmbSeleccion.Visible == false)
+            {
+                grbJobInsert.Visible = false;
+                lstCosas.Visible = false;
+                labListJobs.Visible = false;
+                grbParametros.Visible = false;
+            }
+        }
+
+        private void Seleccion_ValueChng(object sender, EventArgs e)
+        {
+            if (cmbSeleccion.SelectedIndex == 0)
+            {
+                labListJobs.Text = "Lista de empleados";
+                lstCosas.Visible = true;
+                labListJobs.Visible = true;
+                grbParametros.Visible = true;
+                grbJobInsert.Visible = false;
+            }
+            else if (cmbSeleccion.SelectedIndex == 1)
+            {
+                MostrarListaJobs();
+                labListJobs.Text = "Lista de jobs";
+                lstCosas.Visible = true;
+                labListJobs.Visible = true;
+                grbParametros.Visible = false;
+                grbJobInsert.Visible = false;
+            }
+            else if (cmbSeleccion.SelectedIndex == 2)
+            {
+                lstCosas.Visible = false;
+                labListJobs.Visible = false;
+                grbParametros.Visible = false;
+                grbJobInsert.Visible = true;
             }
         }
 
@@ -78,7 +118,7 @@ namespace WinformsConexionBD
                 MessageBox.Show("Valores introducidos no validos");
             
             //Actualizamos la interfaz
-            MostrarLista(); //Actualizamos la lista del form
+            MostrarListaJobs(); //Actualizamos la lista del form
             txtJobTitle.Text = null;
             txtMaxSalary.Text = null;
             txtMinSalary.Text = null;
@@ -117,22 +157,12 @@ namespace WinformsConexionBD
         }
 
         //Muestra la lista de jobs
-        private void MostrarLista()
+        private void MostrarListaJobs()
         {
-            lstJobs.Items.Clear();
-            try
-            {
-                using (connection = new SqlConnection(CONNECTION_STRING))
-                {
-                    connection.Open();
-                    foreach (Job job in SelectJobs())
-                        lstJobs.Items.Add(job);
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            lstCosas.Items.Clear();
+
+            foreach (Job job in SelectJobs())
+                lstCosas.Items.Add(job);
         }
 
         //Creamos la lista extrayendo los datos de la BD
@@ -158,6 +188,6 @@ namespace WinformsConexionBD
             }
 
             return jobs;
-            }
         }
     }
+}
