@@ -34,7 +34,6 @@ namespace WinformsConexionBD
                 connection.Open();
 
                 //Actualizamos interfaz
-                //Obtenemos visibilidad del INSERT JOB
                 labConexion.Text = "Conexión: ON";
                 butClose.Visible = true;
                 labSelec.Visible = true;
@@ -118,7 +117,6 @@ namespace WinformsConexionBD
                 MessageBox.Show("Valores introducidos no validos");
             
             //Actualizamos la interfaz
-            MostrarListaJobs(); //Actualizamos la lista del form
             txtJobTitle.Text = null;
             txtMaxSalary.Text = null;
             txtMinSalary.Text = null;
