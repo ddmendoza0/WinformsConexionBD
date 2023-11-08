@@ -46,13 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employee.cs" />
+    <Compile Include="Modelos\Employee.cs" />
+    <Compile Include="DAL\EmployeeDAL.cs" />
     <Compile Include="Forms\Interface.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Interface.Designer.cs">
       <DependentUpon>Interface.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\JobDAL.cs" />
     <Compile Include="Modelos\Job.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
