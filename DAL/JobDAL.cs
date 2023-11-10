@@ -12,7 +12,9 @@ namespace WinformsConexionBD
     {
         ConexionBD connection = new ConexionBD();
 
+        //
         //Creamos la lista extrayendo los datos de la BD
+        //
         public List<Job> SelectJobs()
         {
             connection.AbrirConexion();
@@ -28,8 +30,8 @@ namespace WinformsConexionBD
             {
                 int jobId = (int)records["job_id"];
                 string jobName = (string)records["job_title"];
-                decimal? minSalary = (decimal)records["min_salary"];
-                decimal? maxSalary = (decimal)records["max_salary"];
+                decimal? minSalary = DecDBNullToNull(records["min_salary"]);
+                decimal? maxSalary = DecDBNullToNull(records["max_salary"]);
 
                 Job job = new Job(jobId, jobName, minSalary, maxSalary);
 
@@ -75,12 +77,15 @@ namespace WinformsConexionBD
             connection.CerrarConexion();
         }
 
-        private static object DBNullToNull(object val)
+        //
+        //Metodos de comprobacion de null
+        //
+        private static decimal? DecDBNullToNull(object val)
         {
             if (val == DBNull.Value)
                 return null;
             else
-                return val;
+                return (decimal)val;
         }
 
         public static object NullToDBNull(object val)

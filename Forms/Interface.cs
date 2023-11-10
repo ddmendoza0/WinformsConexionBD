@@ -51,6 +51,11 @@ namespace WinformsConexionBD
             }
         }
 
+        private void butVer_Click(object sender, EventArgs e)
+        {
+            MostrarListaEmpsFiltro();
+        }
+
         //Boton para crear nuevo job
         private void butInsertJob_Click(object sender, EventArgs e)
         {
@@ -82,5 +87,15 @@ namespace WinformsConexionBD
             foreach (Employee emp in employeeDAL.SelectEmps())
                 lstCosas.Items.Add(emp);
         }
+
+        private void MostrarListaEmpsFiltro()
+        {
+            lstCosas.Items.Clear();
+
+            foreach (Employee emp in employeeDAL.SelectEmpsFiltros(txtNombre.Text, txtApellido.Text, cmbCiudad.SelectedItem.ToString()))
+                lstCosas.Items.Add(emp);
+        }
+
+
     }
 }

@@ -48,6 +48,7 @@
             this.labCiudad = new System.Windows.Forms.Label();
             this.labNombre = new System.Windows.Forms.Label();
             this.labSelec = new System.Windows.Forms.Label();
+            this.butVer = new System.Windows.Forms.Button();
             this.grbJobInsert.SuspendLayout();
             this.grbParametros.SuspendLayout();
             this.SuspendLayout();
@@ -143,7 +144,7 @@
             this.lstCosas.ItemHeight = 16;
             this.lstCosas.Location = new System.Drawing.Point(378, 76);
             this.lstCosas.Name = "lstCosas";
-            this.lstCosas.Size = new System.Drawing.Size(311, 244);
+            this.lstCosas.Size = new System.Drawing.Size(362, 244);
             this.lstCosas.TabIndex = 12;
             this.lstCosas.Visible = false;
             // 
@@ -171,15 +172,16 @@
             // 
             // grbParametros
             // 
+            this.grbParametros.Controls.Add(this.butVer);
             this.grbParametros.Controls.Add(this.cmbCiudad);
             this.grbParametros.Controls.Add(this.txtApellido);
             this.grbParametros.Controls.Add(this.txtNombre);
             this.grbParametros.Controls.Add(this.labApellido);
             this.grbParametros.Controls.Add(this.labCiudad);
             this.grbParametros.Controls.Add(this.labNombre);
-            this.grbParametros.Location = new System.Drawing.Point(23, 147);
+            this.grbParametros.Location = new System.Drawing.Point(23, 138);
             this.grbParametros.Name = "grbParametros";
-            this.grbParametros.Size = new System.Drawing.Size(271, 175);
+            this.grbParametros.Size = new System.Drawing.Size(271, 199);
             this.grbParametros.TabIndex = 15;
             this.grbParametros.TabStop = false;
             this.grbParametros.Text = "Parametros";
@@ -188,6 +190,14 @@
             // cmbCiudad
             // 
             this.cmbCiudad.FormattingEnabled = true;
+            this.cmbCiudad.Items.AddRange(new object[] {
+            "Southlake",
+            "South San Francisco",
+            "Seattle",
+            "Toronto",
+            "London",
+            "Oxford",
+            "Munich"});
             this.cmbCiudad.Location = new System.Drawing.Point(10, 136);
             this.cmbCiudad.Name = "cmbCiudad";
             this.cmbCiudad.Size = new System.Drawing.Size(254, 24);
@@ -243,6 +253,16 @@
             this.labSelec.TabIndex = 16;
             this.labSelec.Text = "Opciones";
             // 
+            // butVer
+            // 
+            this.butVer.Location = new System.Drawing.Point(167, 170);
+            this.butVer.Name = "butVer";
+            this.butVer.Size = new System.Drawing.Size(97, 23);
+            this.butVer.TabIndex = 17;
+            this.butVer.Text = "Ver";
+            this.butVer.UseVisualStyleBackColor = true;
+            this.butVer.Click += new System.EventHandler(this.butVer_Click);
+            // 
             // Interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -289,6 +309,7 @@
         private System.Windows.Forms.ComboBox cmbCiudad;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Button butVer;
     }
 }
 
