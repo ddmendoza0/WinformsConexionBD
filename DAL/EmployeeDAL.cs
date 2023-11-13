@@ -68,19 +68,22 @@ namespace WinformsConexionBD
                         "WHERE ";
 
             // comprobación de filtros actios
-            if (ciudad != null)
+            if (ciudad != "")
             {
-                query += $"l.city = '{ciudad}'";
+                query += $"l.city = '{ciudad}' AND ";
             }
             else if (nombre != null)
             {
-                query += $"e.first_name = '{nombre}'";
+                query += $"e.first_name = '{nombre}' AND ";
             }
             else if (apellido != null)
             {
-                query += "e.last_name = '@apellido'";
+                query += $"e.last_name = '{apellido}' AND ";
             }
             
+            if (query.EndsWith(" "))
+                query = query.Remove(query.Length - 4, 4);
+
             SqlCommand command = new SqlCommand(query, connection.Connection);
             SqlDataReader rec = command.ExecuteReader();
 

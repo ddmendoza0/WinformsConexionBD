@@ -92,7 +92,11 @@ namespace WinformsConexionBD
         {
             lstCosas.Items.Clear();
 
-            foreach (Employee emp in employeeDAL.SelectEmpsFiltros(txtNombre.Text, txtApellido.Text, cmbCiudad.SelectedItem.ToString()))
+            string ciudad = "";
+            if (cmbCiudad.SelectedIndex != 0)
+                ciudad = cmbCiudad.SelectedText;
+
+            foreach (Employee emp in employeeDAL.SelectEmpsFiltros(txtNombre.Text, txtApellido.Text, ciudad))
                 lstCosas.Items.Add(emp);
         }
 
