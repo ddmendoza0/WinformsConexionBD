@@ -12,7 +12,7 @@ namespace WinformsConexionBD
     {
         static string CONNECTION_STRING = @"Data source = 79.143.90.12,54321;
                             Initial Catalog = MendozaDavidEmploye; Persist Security Info = true;
-                            User Id = sa; Password = 123456789";
+                            User Id = sa; Password = ****";
 
         private SqlConnection connection;
         public SqlConnection Connection { get { return connection; } set { connection = value; } }
